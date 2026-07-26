@@ -15,6 +15,7 @@ function Home() {
             {/* Pagination */}
             <div className="border-t py-3">
                 <Footer />
+                <p>hello</p>
             </div>
         </div>
     )
