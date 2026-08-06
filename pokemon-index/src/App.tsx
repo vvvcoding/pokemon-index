@@ -1,4 +1,3 @@
-import './App.css'
 import Home from './pages/Home.tsx'
 import NavBar from './components/custom-ui/NavBar.tsx'
 
