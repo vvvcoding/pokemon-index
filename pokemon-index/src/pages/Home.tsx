@@ -1,14 +1,34 @@
 // Import libraries
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Import components
 import CardContainer from "../components/custom-ui/CardContainer"
 import Footer from "../components/custom-ui/Footer"
 
+// Import context
+import { usePokemonContext } from "../context/PokemonContext"
+
+// Import data
+import pokemonDB from "../../../backend/storage/pokemondb.json"
+
 function Home() {
 
     const [currentPage, setCurrentPage] = useState(1)
-    const totalPages = 16
+    const { query } = usePokemonContext()
+    const pokemonPerPage = 10
+
+    const pokemonList = Object.values(pokemonDB.pokemon)
+    const filteredPokemon = query
+        ? pokemonList.filter((pokemon) => pokemon.name.toLowerCase().includes(query))
+        : pokemonList
+
+    const totalPages = Math.max(1, Math.ceil(filteredPokemon.length / pokemonPerPage))
+
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages)
+        }
+    }, [currentPage, totalPages])
 
     return (
         <div className="h-full flex flex-col">

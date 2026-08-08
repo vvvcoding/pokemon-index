@@ -6,6 +6,7 @@ import {
     NavigationMenuContent, 
     NavigationMenuLink 
 } from "../ui/navigation-menu"
+import { Button } from "@/components/ui/button.tsx"
 import SearchBar from "./SearchBar"
 
 function NavBar() {
@@ -22,26 +23,27 @@ function NavBar() {
                 {/* Navigation Menu */}
                 <NavigationMenu>
                         <NavigationMenuList>
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <NavigationMenuLink>Link</NavigationMenuLink>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
+                                <NavigationMenuItem>
+                                    <NavigationMenuTrigger>Generations</NavigationMenuTrigger>
+                                    <NavigationMenuContent>
+                                        <NavigationMenuLink>Link</NavigationMenuLink>
+                                    </NavigationMenuContent>
+                                </NavigationMenuItem>
 
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <NavigationMenuLink>Link</NavigationMenuLink>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
+                                <NavigationMenuItem>
+                                    
+                                </NavigationMenuItem>
 
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <NavigationMenuLink>Link</NavigationMenuLink>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
+                                <NavigationMenuItem>
+                                    <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+                                    <NavigationMenuContent>
+                                        <NavigationMenuLink>Link</NavigationMenuLink>
+                                    </NavigationMenuContent>
+                                </NavigationMenuItem>
+
+                                {/* Create account button */}
+                                <Button>Log In</Button>
+                                
                         </NavigationMenuList>
                 </NavigationMenu>
             </nav>
