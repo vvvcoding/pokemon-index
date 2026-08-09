@@ -9,7 +9,13 @@ import {
 import { Button } from "@/components/ui/button.tsx"
 import SearchBar from "./SearchBar"
 
+// Import context
+import { usePokemonContext } from "../../context/PokemonContext"
+
 function NavBar() {
+
+    const { setGeneration } = usePokemonContext()
+
     return (
         <div className="sticky top-0 z-50 border-b relative bg-white px-7 py-1">
             <nav className="p-2 flex items-center justify-between">
@@ -23,10 +29,21 @@ function NavBar() {
                 {/* Navigation Menu */}
                 <NavigationMenu>
                         <NavigationMenuList>
+
+                                {/* Generations dropdown */}
                                 <NavigationMenuItem>
                                     <NavigationMenuTrigger>Generations</NavigationMenuTrigger>
                                     <NavigationMenuContent>
-                                        <NavigationMenuLink>Link</NavigationMenuLink>
+                                        <Button
+                                            onClick={() => setGeneration(1)}
+                                        >
+                                            Generation One
+                                        </Button>
+                                        <Button
+                                            onClick={() => setGeneration(2)}
+                                        >
+                                            Generation Two
+                                        </Button>
                                     </NavigationMenuContent>
                                 </NavigationMenuItem>
 
@@ -43,7 +60,7 @@ function NavBar() {
 
                                 {/* Create account button */}
                                 <Button>Log In</Button>
-                                
+
                         </NavigationMenuList>
                 </NavigationMenu>
             </nav>
