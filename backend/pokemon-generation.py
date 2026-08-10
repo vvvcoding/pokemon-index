@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-generation = 2
+generation = 9
 generationUrl = f"https://pokeapi.co/api/v2/generation/{generation}/"
 
 def dbWrite(generation, data):
