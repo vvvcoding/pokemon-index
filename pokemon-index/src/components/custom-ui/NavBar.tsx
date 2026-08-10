@@ -1,10 +1,11 @@
+import { useState } from 'react'
 import { 
     NavigationMenu, 
     NavigationMenuList, 
     NavigationMenuTrigger, 
     NavigationMenuItem, 
     NavigationMenuContent, 
-    NavigationMenuLink 
+    //NavigationMenuLink 
 } from "../ui/navigation-menu"
 import { Button } from "@/components/ui/button.tsx"
 import SearchBar from "./SearchBar"
@@ -14,6 +15,7 @@ import { usePokemonContext } from "../../context/PokemonContext"
 
 function NavBar() {
 
+    const [genText, setGenText] = useState("All Generations")
     const { setGeneration } = usePokemonContext()
 
     return (
@@ -24,38 +26,51 @@ function NavBar() {
                 <h1 className="text-md font-semibold pl-2">Pokemon Index</h1>
             
                 {/* Search Bar */}
-                <SearchBar />
+                <div className="flex items-center justify-between gap-2 absolute left-1/2 -translate-x-1/2">
+                    <SearchBar />
+                    <NavigationMenu>
+                        <NavigationMenuList className="gap-1">
+                            {/* Generations dropdown */}
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger>{genText}</NavigationMenuTrigger>
+                                <NavigationMenuContent className="flex flex-col">
+                                    <Button
+                                        onClick={() => (setGeneration(0), setGenText("All Generations"))}
+                                    >
+                                        All Generations
+                                    </Button>
+                                    <Button
+                                        onClick={() => (setGeneration(1), setGenText("Generation One"))}
+                                    >
+                                        Generation One
+                                    </Button>
+                                    <Button
+                                        onClick={() => (setGeneration(2), setGenText("Generation Two"))}
+                                    >
+                                        Generation Two
+                                    </Button>                               
+                                    <Button
+                                        onClick={() => (setGeneration(3), setGenText("Generation Three"))}
+                                    >
+                                        Generation Three
+                                    </Button>
+                                    <Button
+                                        onClick={() => (setGeneration(4), setGenText("Generation Four"))}
+                                    >
+                                        Generation Four
+                                    </Button>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                        </NavigationMenuList>
+                    </NavigationMenu>
+                </div>
 
                 {/* Navigation Menu */}
                 <NavigationMenu>
-                        <NavigationMenuList>
-
-                                {/* Generations dropdown */}
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>Generations</NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <Button
-                                            onClick={() => setGeneration(1)}
-                                        >
-                                            Generation One
-                                        </Button>
-                                        <Button
-                                            onClick={() => setGeneration(2)}
-                                        >
-                                            Generation Two
-                                        </Button>
-                                    </NavigationMenuContent>
-                                </NavigationMenuItem>
+                        <NavigationMenuList className="gap-1">
 
                                 <NavigationMenuItem>
                                     
-                                </NavigationMenuItem>
-
-                                <NavigationMenuItem>
-                                    <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                                    <NavigationMenuContent>
-                                        <NavigationMenuLink>Link</NavigationMenuLink>
-                                    </NavigationMenuContent>
                                 </NavigationMenuItem>
 
                                 {/* Create account button */}
