@@ -8,21 +8,10 @@ import Footer from "../components/custom-ui/Footer"
 // Import context
 import { usePokemonContext } from "../context/PokemonContext"
 
-// Import data
-import pokemonDB from "../../../backend/storage/pokemondb.json"
-
 function Home() {
 
     const [currentPage, setCurrentPage] = useState(1)
-    const { query } = usePokemonContext()
-    const pokemonPerPage = 10
-
-    const pokemonList = Object.values(pokemonDB.pokemon)
-    const filteredPokemon = query
-        ? pokemonList.filter((pokemon) => pokemon.name.toLowerCase().includes(query))
-        : pokemonList
-
-    const totalPages = Math.max(1, Math.ceil(filteredPokemon.length / pokemonPerPage))
+    const { totalPages } = usePokemonContext()
 
     useEffect(() => {
         if (currentPage > totalPages) {
