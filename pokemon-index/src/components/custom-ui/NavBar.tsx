@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { 
     NavigationMenu, 
     NavigationMenuList, 
@@ -15,6 +16,7 @@ import { usePokemonContext } from "../../context/PokemonContext"
 
 function NavBar() {
 
+    const navigate = useNavigate()
     const [genText, setGenText] = useState("All Generations")
     const { setGeneration } = usePokemonContext()
 
@@ -74,7 +76,11 @@ function NavBar() {
                                 </NavigationMenuItem>
 
                                 {/* Create account button */}
-                                <Button>Log In</Button>
+                                <Button
+                                    onClick={() => navigate('/login')}
+                                >
+                                    Log In
+                                </Button>
 
                         </NavigationMenuList>
                 </NavigationMenu>
