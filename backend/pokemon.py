@@ -3,43 +3,34 @@ import json
 import os
 
 def stats(data):
-    print("Name: ", data["name"])
+    print("Name:", data["name"])
     for t in data["types"]:
-        print("Type: ", t["type"]["name"])
-    print("Height: ", data["height"])
-    print("Weight: ", data["weight"])
-
-def dbWrite(name, data):
-    pokemon = {
-        "name": data["name"],
-        "types": [t["type"]["name"] for t in data["types"]],
-        "height": data["height"],
-        "weight": data["weight"]
-    }
-
-    path = "./storage/pokemondb.json"
-
-    if os.path.exists(path):
-        with open(path, "r") as file:
-            database = json.load(file)
-    else:
-        database = {"pokemon": {}}
-
-    database["pokemon"][name] = pokemon
-
-    with open(path, "w") as file:
-        json.dump(database, file, indent=4)
-
-    print("Successfully wrote data to file.")
+        print("Type:", t["type"]["name"])
+    print("Height:", data["height"])
+    print("Weight:", data["weight"])
+    print("Sprite:", data["sprites"]["front_default"])
 
 try:
-    path = "./storage/namesdb.json"
-    
-    if os.path.exists(path):
-        with open(path, "r") as file:
-            database = json.load(file)
+    generation = "gen4"
 
-    for name in database["generations"]["first"]["pokemon"]:
+    # Load the list of Pokémon names
+    with open("./storage/namesdb.json", "r") as file:
+        names_db = json.load(file)
+
+    # Load the Pokémon database if it exists
+    pokemon_db_path = "./storage/pokemondb.json"
+
+    if os.path.exists(pokemon_db_path):
+        with open(pokemon_db_path, "r") as file:
+            pokemon_db = json.load(file)
+    else:
+        pokemon_db = {"pokemon": {}}
+
+    if generation not in pokemon_db["pokemon"]:
+        pokemon_db["pokemon"][generation] = {}
+
+    # Fetch each Pokémon
+    for name in names_db["generations"]["fourth"]["pokemon"]:
         url = f"https://pokeapi.co/api/v2/pokemon/{name}/"
 
         response = requests.get(url)
@@ -47,10 +38,28 @@ try:
         data = response.json()
 
         stats(data)
-        dbWrite(name, data)
+
+        pokemon_db["pokemon"][generation][name] = {
+            "name": data["name"],
+            "types": [t["type"]["name"] for t in data["types"]],
+            "height": data["height"],
+            "weight": data["weight"],
+            "sprite": data["sprites"]["front_default"]
+        }
+
         print()
 
-except requests.exceptions.HTTPError:
-    print("Failed:", response.status_code, response.code())
+    # Save everything once
+    with open(pokemon_db_path, "w") as file:
+        json.dump(pokemon_db, file, indent=4)
+
+    print("Successfully wrote all Pokémon to file.")
+
+except requests.exceptions.HTTPError as e:
+    print("HTTP Error:", e)
+
 except requests.exceptions.RequestException as e:
-    print("Request failed: ", e)
+    print("Request failed:", e)
+
+except FileNotFoundError as e:
+    print(e)
