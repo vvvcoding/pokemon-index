@@ -31,7 +31,7 @@ const PokemonContext = createContext<PokemonContextType | undefined>(undefined)
 export function PokemonProvider({ children }: PokemonContextProps) {
     const [searchInput, setSearchInput] = useState("")
     const [generation, setGeneration] = useState(0)
-    const pokemonPerPage = 10
+    const pokemonPerPage = 20
 
     const query = useMemo(() => searchInput.toLowerCase().trim(), [searchInput])
 

@@ -3,30 +3,27 @@ import { Users, Lock } from 'lucide-react'
 
 // Import components
 import { Button } from "@/components/ui/button.tsx"
-import { Checkbox } from "@/components/ui/checkbox"
 
 // Import libraries
 import { useNavigate, Link } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-function LoginForm() {
+interface LoginFormProps {
+    setSignIn: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function LoginForm({ setSignIn }: LoginFormProps) {
 
     const navigate = useNavigate()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [field, setField] = useState(false)
 
     return (
         <form 
             className="w-full max-w-md mx-auto" 
             onSubmit={(e) => {
                 e.preventDefault()
-
-                // Inverted because of keren 
-                // remove ! to make it normal
-                if (!field) {
-                    navigate("/")
-                }
+                navigate('/')
             }}
         >
             
@@ -68,40 +65,33 @@ function LoginForm() {
                 </div>
             </div>
 
-            {/* Accept terms and conditions ---- forgot password */}
-            <div className="flex items-center justify-between pt-4">
-                <div className="flex items-center gap-2">
-                    <Checkbox 
-                        id="terms-checkbox"
-                        name="terms-checkbox"
-                        checked={field}
-                        onCheckedChange={(checked) => setField(checked === true)}
-                    />
-
-                    <label
-                        htmlFor="terms-checkbox"
-                        className="text-sm"
-                    >
-                        Accept terms and conditions
-                    </label>
-                </div>
-
+            {/* Forgot password */}
+            <div className="flex justify-end pt-2">
                 <Link
                     to="/"
-                    className="text-md text-blue-600 hover:text-blue-800"
+                    className="text-sm text-blue-600 hover:text-blue-800"
                 >
                     Forgot password?
                 </Link>
             </div>
 
             {/* Login button */}
-            <div className="pt-7">
+            <div className="pt-5">
                 <Button
                     type="submit"
                     className="w-full max-w-md h-11"
                 >
                     Sign In
                 </Button>
+            </div>
+            
+            {/* User doesn't have an account */}
+            <div className="pt-7 text-center">
+                <h3 
+                    className="text-sm text-gray-500"
+                >
+                    Don't have an account? <a className="text-blue-600 hover:text-blue-800" onClick={() => setSignIn(false)}>Create account</a>
+                </h3>
             </div>
 
         </form>
