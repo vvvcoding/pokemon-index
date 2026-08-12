@@ -1,6 +1,7 @@
 // Import pages
 import Home from './pages/Home.tsx'
 import Login from './pages/Login.tsx'
+import UserDashboard from './pages/UserDashboard.tsx'
 
 // Import components
 import MainLayout from './layouts/MainLayout.tsx'
@@ -14,16 +15,6 @@ import { PokemonProvider } from './context/PokemonContext.tsx'
 function App() {
   return(
     <PokemonProvider>
-      {/* <div className="h-screen flex flex-col overflow-hidden">
-        <NavBar />
-          <main className="flex-1 overflow-y-hidden">
-            <Routes>
-              <Route path='/login' element={<Login />} />
-              <Route path='/' element={<Home />} />
-            </Routes>
-          </main>
-      </div> */}
-
       <Routes>
         {/* Pages without navbar */}
         <Route path='/login' element={<Login />} />
@@ -31,6 +22,7 @@ function App() {
         {/* Pages with navbar */}
         <Route element={<MainLayout />}>
           <Route path='/' element={<Home />} />
+          <Route path='/dashboard' element={<UserDashboard />} />
         </Route>
       </Routes>
     </PokemonProvider>

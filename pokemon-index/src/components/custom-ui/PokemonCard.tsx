@@ -57,7 +57,7 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     <p>Pokemon Card</p>
-                    <Button>Pokemon Action</Button>
+                    <Button>Stats</Button>
                 </CardFooter>
             </Card>
         </div>
