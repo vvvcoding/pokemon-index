@@ -11,21 +11,24 @@ import { Route, Routes } from 'react-router-dom'
 
 // Import context
 import { PokemonProvider } from './context/PokemonContext.tsx'
+import { AuthProvider } from './context/AuthContext.tsx'
 
 function App() {
   return(
-    <PokemonProvider>
-      <Routes>
-        {/* Pages without navbar */}
-        <Route path='/login' element={<Login />} />
+    <AuthProvider>
+      <PokemonProvider>
+        <Routes>
+          {/* Pages without navbar */}
+          <Route path='/login' element={<Login />} />
 
-        {/* Pages with navbar */}
-        <Route element={<MainLayout />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/dashboard' element={<UserDashboard />} />
-        </Route>
-      </Routes>
-    </PokemonProvider>
+          {/* Pages with navbar */}
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/dashboard' element={<UserDashboard />} />
+          </Route>
+        </Routes>
+      </PokemonProvider>
+    </AuthProvider>
   )
 }
 

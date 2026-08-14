@@ -18,11 +18,11 @@ function Login() {
                     
                     {/* Login form and sign up form*/}
                     {signIn ? (
-                        <LoginForm
+                        <SignUpForm
                             setSignIn={setSignIn}
                         />
                     ) : (
-                        <SignUpForm
+                        <LoginForm
                             setSignIn={setSignIn}
                         />
                     )}

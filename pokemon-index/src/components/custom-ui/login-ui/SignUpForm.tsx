@@ -37,7 +37,7 @@ function SignUpForm({ setSignIn }: SignUpProps) {
         >
             
             {/* Login title */}
-            <h1 className="text-3xl pb-2">Create your account.</h1>
+            <h1 className="text-3xl pb-2">Create your account</h1>
             <h3 className="text-md pb-10 text-gray-500">Fill out the information below to start your journey.</h3>
 
             {/* First and last name */}
@@ -162,7 +162,7 @@ function SignUpForm({ setSignIn }: SignUpProps) {
 
             {/* Already have an account */}
             <div className="pt-7 text-center">
-                <h3 className="text-sm text-gray-500">Already have an account? <a className="text-blue-600 hover:text-blue-800" onClick={() => setSignIn(true)}>Log in</a></h3>
+                <h3 className="text-sm text-gray-500">Already have an account? <a className="text-blue-600 hover:text-blue-800" onClick={() => setSignIn(false)}>Log in</a></h3>
             </div>
 
         </form>

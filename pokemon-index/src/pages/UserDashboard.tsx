@@ -9,12 +9,16 @@ import StatsContainer from '../components/custom-ui/dashboard-ui/StatsContainer'
 
 // Import context
 import { usePokemonContext } from "../context/PokemonContext"
+import { useAuth } from '@/context/AuthContext'
 import DropDownFilterGeneration from '../components/custom-ui/dashboard-ui/DropDownFilterGeneration'
 
 function UserDashboard() {
 
+    const { user } = useAuth()
     const [currentPage, setCurrentPage] = useState(1)
     const { totalPages } = usePokemonContext()
+
+    const displayName = user?.displayName || user?.email?.split("@")[0] || "User"
 
     useEffect(() => {
         if (currentPage > totalPages) {
@@ -32,6 +36,9 @@ function UserDashboard() {
                     <div className="h-full w-full flex flex-col items-center gap-4">
                         
                         <div className="flex flex-col items-center gap-4">
+                            {/* User's name */}
+                            <h1>{displayName}</h1>
+
                             {/* Search bar */}
                             <SearchBar />
                             
