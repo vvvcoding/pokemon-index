@@ -20,7 +20,8 @@ function CardContainer({ currentPage }: CardContainerProps) {
     }
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        // <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {pokemonOnPage.map((pokemon) => (
                 <PokemonCard key={pokemon.name} pokemon={pokemon} />
             ))}
