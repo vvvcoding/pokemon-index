@@ -1,7 +1,13 @@
 import LoginRightContainer from '../components/custom-ui/login-ui/LoginRightContainer'
 import LoginForm from '../components/custom-ui/login-ui/LoginForm'
+import SignUpForm from '../components/custom-ui/login-ui/SignUpForm'
+
+// Import libraries
+import { useState } from 'react'
 
 function Login() {
+
+    const [signIn, setSignIn] = useState(false)
 
     return (
         <div className="h-screen w-full">
@@ -10,8 +16,16 @@ function Login() {
                 {/* Left side of the screen */}
                 <div className="text-center h-full flex flex-col justify-center">
                     
-                    {/* Login form */}
-                    <LoginForm />
+                    {/* Login form and sign up form*/}
+                    {signIn ? (
+                        <SignUpForm
+                            setSignIn={setSignIn}
+                        />
+                    ) : (
+                        <LoginForm
+                            setSignIn={setSignIn}
+                        />
+                    )}
                     
                 </div>
 
